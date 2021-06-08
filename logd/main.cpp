@@ -139,24 +139,24 @@ static int drop_privs(bool klogd, bool auditd) {
         android::prdebug(
             "failed to set CAP_SETGID, CAP_SYSLOG or CAP_AUDIT_CONTROL (%d)",
             errno);
-        if (!eng) return -1;
+        //if (!eng) return -1;
     }
 
     gid_t groups[] = { AID_READPROC };
 
     if (setgroups(arraysize(groups), groups) == -1) {
         android::prdebug("failed to set AID_READPROC groups");
-        if (!eng) return -1;
+        //if (!eng) return -1;
     }
 
     if (setgid(AID_LOGD) != 0) {
         android::prdebug("failed to set AID_LOGD gid");
-        if (!eng) return -1;
+        //if (!eng) return -1;
     }
 
     if (setuid(AID_LOGD) != 0) {
         android::prdebug("failed to set AID_LOGD uid");
-        if (!eng) return -1;
+        //if (!eng) return -1;
     }
 
     if (cap_set_flag(caps.get(), CAP_PERMITTED, 1, cap_value, CAP_CLEAR) < 0) {
@@ -167,7 +167,7 @@ static int drop_privs(bool klogd, bool auditd) {
     }
     if (cap_set_proc(caps.get()) < 0) {
         android::prdebug("failed to clear CAP_SETGID (%d)", errno);
-        if (!eng) return -1;
+        //if (!eng) return -1;
     }
 
     return 0;
