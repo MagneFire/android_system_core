@@ -1093,17 +1093,17 @@ int main(int argc, char** argv) {
     std::string bootscript = GetProperty("ro.boot.init_rc", "");
     if (bootscript.empty()) {
         parser.ParseConfig("/init.rc");
-        parser.set_is_system_etc_init_loaded(
+        /*parser.set_is_system_etc_init_loaded(
                 parser.ParseConfig("/system/etc/init"));
         parser.set_is_vendor_etc_init_loaded(
                 parser.ParseConfig("/vendor/etc/init"));
-        parser.set_is_odm_etc_init_loaded(parser.ParseConfig("/odm/etc/init"));
+        parser.set_is_odm_etc_init_loaded(parser.ParseConfig("/odm/etc/init"));*/
     } else {
         parser.ParseConfig(bootscript);
-        parser.set_is_system_etc_init_loaded(true);
-        parser.set_is_vendor_etc_init_loaded(true);
-        parser.set_is_odm_etc_init_loaded(true);
     }
+    parser.set_is_system_etc_init_loaded(true);
+    parser.set_is_vendor_etc_init_loaded(true);
+    parser.set_is_odm_etc_init_loaded(true);
 
     // Turning this on and letting the INFO logging be discarded adds 0.2s to
     // Nexus 9 boot time, so it's disabled by default.
